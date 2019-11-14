@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start_mac": "node condense.js /Users/Drew/playin/drew_log_processor/drew_tasker_logs",
-    "start": "node condense.js /media/pi/TOSHIBA EXT/drew_tasker_logs"
+    "start": "node condense.js '/media/pi/TOSHIBA EXT/drew_tasker_logs'"
   },
   "author": "",
   "license": "ISC"
