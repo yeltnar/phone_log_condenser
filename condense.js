@@ -130,11 +130,12 @@ function expandFolder( path, file_contents=false ){
     path = removeTrailingSlash(path);
 
     try{
-        children = fs.readdirSync( path );
+        children = readDir(path);
         type = "folder";
     }catch(e){
         if( file_contents===true ){
-            content = fs.readFileSync(path).toString();
+            content = readFile(path);
+            process.exit();
         }
         type = "file";
         // assume its a file
@@ -165,6 +166,22 @@ function removeTrailingSlash(path){
         path = path.substring(0, path.length-2);
     }
     return path;
+}
+
+function readDir(path){
+    try{
+        return fs.readdirSync( path );
+    }catch(e){
+        return fs.readlinkSync( path )
+    }
+}
+
+function readFile(path){
+    try{
+        return fs.readFileSync(path).toString();
+    }catch(e){
+        return fs.readlinkSync( path )
+    }
 }
 
 function execPromise(command, options){
